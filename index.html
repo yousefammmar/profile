@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yousef Odeh | Command Center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Montserrat:wght@800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --term-bg: rgba(10, 10, 20, 0.85);
+            --term-header: #1e1e3e;
+            --accent: #0ea5e9;
+            --accent-glow: rgba(14, 165, 233, 0.4);
+            --green: #10b981;
+            --red: #ef4444;
+            --yellow: #f59e0b;
+            --text: #e2e8f0;
+            --text-dim: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #020617;
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Terminal Window */
+        .terminal {
+            width: 100%;
+            max-width: 1100px;
+            height: 85vh;
+            background: var(--term-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow);
+            animation: terminalIn 0.6s ease-out;
+            position: relative;
+        }
+
+        @keyframes terminalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Header Bar */
+        .term-header {
+            background: var(--term-header);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .close {
+            background: var(--red);
+        }
+
+        .min {
+            background: var(--yellow);
+        }
+
+        .max {
+            background: var(--green);
+        }
+
+        .title {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+        }
+
+        /* Layout */
+        .term-main {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .term-sidebar {
+            width: 240px;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-link {
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 6px;
+            transition: 0.2s;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link.active {
+            color: var(--accent);
+            background: rgba(14, 165, 233, 0.1);
+            border-left: 3px solid var(--accent);
+        }
+
+        /* Console Area */
+        .term-console {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .console-output {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .prompt {
+            color: var(--green);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.4rem;
+            background: var(--accent);
+            margin-left: 5px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Content Styling */
+        h1.hero-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .highlight {
+            color: var(--accent);
+        }
+
+        .skill-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .skill-item {
+            margin-bottom: 10px;
+        }
+
+        .skill-item::before {
+            content: "> ";
+            color: var(--accent);
+        }
+
+        .project-log {
+            border-left: 2px solid var(--accent);
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+
+        .project-log h3 {
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+
+        /* Stats Bar */
+        .term-footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 20px;
+            display: flex;
+            gap: 30px;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        .stat-item span {
+            color: var(--accent);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .term-sidebar {
+                display: none;
+            }
+
+            .term-console {
+                padding: 25px;
+            }
+
+            h1.hero-name {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="terminal">
+        <div class="term-header">
+            <div class="controls">
+                <div class="control close"></div>
+                <div class="control min"></div>
+                <div class="control max"></div>
+            </div>
+            <div class="title">ODEH-OS v2.0.4 - session: user@main</div>
+            <div style="width: 50px;"></div>
+        </div>
+
+        <div class="term-main">
+            <aside class="term-sidebar">
+                <div class="nav-link active" onclick="showContent('home')">~/home</div>
+                <div class="nav-link" onclick="showContent('about')">~/about</div>
+                <div class="nav-link" onclick="showContent('skills')">~/skills</div>
+                <div class="nav-link" onclick="showContent('projects')">~/projects</div>
+                <div class="nav-link" onclick="showContent('contact')">~/contact</div>
+            </aside>
+
+            <main class="term-console" id="console">
+                <div class="console-output" id="output">
+                    <!-- Content will be injected here -->
+                </div>
+            </main>
+        </div>
+
+        <div class="term-footer">
+            <div class="stat-item">STATUS: <span>ACTIVE</span></div>
+            <div class="stat-item">USER: <span>YOUSEF_ODEH</span></div>
+            <div class="stat-item">LANGUAGE: <span>JS/PHP/REACT/CPP</span></div>
+            <div class="stat-item">UPTIME: <span id="uptime">0h 0m 0s</span></div>
+        </div>
+    </div>
+
+    <script src="cyber_network.js"></script>
+    <script>
+        const contentData = {
+            home: `
+                <div class="prompt">yousef@psut:~$ run intro.exe</div>
+                <h1 class="hero-name">YOUSEF ODEH</h1>
+                <p>SOFTWARE ENGINEERING STUDENT @ <span class="highlight">PSUT</span></p>
+                <div style="margin-top: 30px;">
+                    <a href="Yousef_Odeh_Resume.pdf" download class="highlight" style="text-decoration: none; border: 1px solid var(--accent); padding: 5px 15px;">[ DOWNLOAD_RESUME ]</a>
+                </div>
+            `,
+            about: `
+                <div class="prompt">yousef@psut:~$ cat about_me.txt</div>
+                <p>I am a motivated Software Engineering student with a deep interest in competitive programming and system-level development.</p>
+                <p style="margin-top: 15px;">I enjoy tackling complex problems, optimizing performance, and continuously improving my algorithmic thinking through real-world projects and ICPC contests.</p>
+            `,
+            skills: `
+                <div class="prompt">yousef@psut:~$ system --list-skills</div>
+                <ul class="skill-list">
+                    <li class="skill-item">JAVA / C++ / C#</li>
+                    <li class="skill-item">HTML5 / CSS3 / JAVASCRIPT</li>
+                    <li class="skill-item">REACT / PHP DEVELOPMENT</li>
+                    <li class="skill-item">ALGORITHMS & DATA STRUCTURES</li>
+                    <li class="skill-item">OBJECT ORIENTED ENGINEERING</li>
+                </ul>
+            `,
+            projects: `
+                <div class="prompt">yousef@psut:~$ ls ./grand_works/</div>
+                <div class="project-log" style="margin-top: 20px;">
+                    <h3>CAR DEALERSHIP SYSTEM</h3>
+                    <p>Advanced OOP infrastructure for vehicle asset management and transaction logging.</p>
+                </div>
+                <div class="project-log">
+                    <h3>TO-DO LIST WEB APP</h3>
+                    <p>Minimalist productivity tool focusing on responsive interface and storage persistence.</p>
+                </div>
+                <div class="project-log">
+                    <h3>ICPC COMPETITIVE TRAINING</h3>
+                    <p>Ongoing optimization of algorithmic solving speed and complexity analysis.</p>
+                </div>
+            `,
+            contact: `
+                <div class="prompt">yousef@psut:~$ query contact_info</div>
+                <p style="margin-top: 20px;">EMAIL: <span class="highlight">you20240781@std.psut.edu.jo</span></p>
+                <p>PHONE: +962 782 534 394</p>
+                <p>LOCATION: AMMAN, JORDAN</p>
+                <div style="margin-top: 30px;">
+                   <a href="https://github.com/yousefammmar" class="highlight">[ GITHUB ]</a> 
+                   <a href="https://www.linkedin.com/in/yousef-odeh-941257330/" class="highlight" style="margin-left: 20px;">[ LINKEDIN ]</a>
+                </div>
+            `
+        };
+
+        function showContent(key) {
+            // Update sidebar
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.innerText.includes(key)) link.classList.add('active');
+            });
+
+            // Set content with typewriter-like feel (simple version)
+            const output = document.getElementById('output');
+            output.innerHTML = contentData[key] + '<span class="cursor"></span>';
+
+            // Auto scroll to bottom
+            const console = document.getElementById('console');
+            console.scrollTop = console.scrollHeight;
+        }
+
+        // Initialize Home
+        showContent('home');
+
+        // Uptime counter
+        let seconds = 0;
+        setInterval(() => {
+            seconds++;
+            const h = Math.floor(seconds / 3600);
+            const m = Math.floor((seconds % 3600) / 60);
+            const s = seconds % 60;
+            document.getElementById('uptime').innerText = `${h}h ${m}m ${s}s`;
+        }, 1000);
+    </script>
+</body>
+
+</html>
