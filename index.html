@@ -251,16 +251,51 @@
 
         /* Mobile */
         @media (max-width: 768px) {
+            .term-main {
+                flex-direction: column;
+            }
+
             .term-sidebar {
+                width: 100%;
+                height: auto;
+                padding: 10px 15px;
+                flex-direction: row;
+                overflow-x: auto;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                gap: 10px;
+                white-space: nowrap;
+                scrollbar-width: none;
+                display: flex;
+            }
+
+            .term-sidebar::-webkit-scrollbar {
                 display: none;
             }
 
+            .nav-link {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+                flex-shrink: 0;
+            }
+
+            .nav-link.active {
+                border-left: none;
+                border-bottom: 2px solid var(--accent);
+            }
+
             .term-console {
-                padding: 25px;
+                padding: 20px;
             }
 
             h1.hero-name {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
+            }
+
+            .term-footer {
+                flex-wrap: wrap;
+                gap: 10px;
+                padding: 10px 15px;
             }
         }
     </style>
