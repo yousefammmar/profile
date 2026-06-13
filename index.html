@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yousef Odeh | Software Engineering Portfolio</title>
+  <meta name="description" content="Yousef Odeh — Software Engineering student at PSUT, full-stack developer, and competitive programmer. Explore projects, skills, and achievements." />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "secondary-fixed-dim": "#45dfa4",
+            "primary-fixed": "#c4e7ff",
+            "primary-container": "#38bdf8",
+            "on-error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#005137",
+            "on-background": "#dce2f6",
+            "on-tertiary": "#3c2f00",
+            "primary-fixed-dim": "#7bd0ff",
+            "surface-container": "#19202e",
+            "primary": "#8ed5ff",
+            "inverse-surface": "#dce2f6",
+            "surface-container-highest": "#2e3544",
+            "inverse-primary": "#00668a",
+            "tertiary-fixed": "#ffe083",
+            "error-container": "#93000a",
+            "on-surface-variant": "#bdc8d1",
+            "outline": "#87929a",
+            "tertiary-fixed-dim": "#eec200",
+            "tertiary-container": "#d5ad00",
+            "surface-container-lowest": "#070e1c",
+            "surface-bright": "#323949",
+            "outline-variant": "#3e484f",
+            "on-primary": "#00354a",
+            "on-secondary-container": "#00452e",
+            "on-error": "#690005",
+            "surface": "#0c1321",
+            "on-tertiary-container": "#534200",
+            "secondary-fixed": "#68fcbf",
+            "on-primary-container": "#004965",
+            "on-tertiary-fixed": "#231b00",
+            "secondary": "#45dfa4",
+            "surface-tint": "#7bd0ff",
+            "surface-container-low": "#151b2a",
+            "on-primary-fixed-variant": "#004c69",
+            "tertiary": "#f5c80c",
+            "on-secondary": "#003825",
+            "inverse-on-surface": "#2a3040",
+            "surface-dim": "#0c1321",
+            "error": "#ffb4ab",
+            "on-primary-fixed": "#001e2c",
+            "on-tertiary-fixed-variant": "#574500",
+            "secondary-container": "#00bd85",
+            "surface-container-high": "#232a39",
+            "background": "#0c1321",
+            "surface-variant": "#2e3544",
+            "on-surface": "#dce2f6",
+            "on-secondary-fixed": "#002114"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"
+          },
+          spacing: {
+            "margin-mobile": "16px", "base": "8px", "stack-lg": "48px",
+            "stack-md": "24px", "container-max": "1200px", "stack-sm": "12px", "gutter": "24px"
+          },
+          fontFamily: {
+            "headline-md": ["Inter"], "caption": ["Inter"], "body-lg": ["Inter"],
+            "headline-lg": ["Inter"], "headline-xl": ["Inter"], "body-md": ["Inter"],
+            "label-mono": ["JetBrains Mono"], "headline-xl-mobile": ["Inter"]
+          },
+          fontSize: {
+            "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+            "caption": ["12px", { lineHeight: "16px", fontWeight: "500" }],
+            "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+            "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }],
+            "headline-xl": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "800" }],
+            "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+            "label-mono": ["14px", { lineHeight: "20px", letterSpacing: "0.05em", fontWeight: "500" }],
+            "headline-xl-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "800" }]
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #0b1220;
+      color: #dce2f6;
+      scroll-behavior: smooth;
+      font-family: 'Inter', sans-serif;
+    }
+    .dot-grid {
+      background-image: radial-gradient(rgba(56,189,248,0.05) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .glass-card {
+      background: rgba(17,24,39,0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(135,146,154,0.1);
+    }
+    .hover-glow:hover {
+      box-shadow: 0 0 24px rgba(56,189,248,0.15);
+      border-color: rgba(56,189,248,0.3) !important;
+    }
+    .text-glow { text-shadow: 0 0 12px rgba(56,189,248,0.45); }
+    /* Typewriter cursor */
+    .tw-cursor {
+      display: inline-block; width: 3px; height: 1em;
+      background: #8ed5ff; vertical-align: middle; margin-left: 2px;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    /* Scroll progress bar */
+    #scroll-bar {
+      position: fixed; top: 0; left: 0; height: 2px; z-index: 9999;
+      background: linear-gradient(90deg, #8ed5ff, #45dfa4);
+      width: 0%; transition: width .08s linear;
+    }
+    /* Mobile nav */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: flex; }
+    /* Section fade-in */
+    .fade-section { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .fade-section.visible { opacity: 1; transform: translateY(0); }
+    /* Code card float */
+    @keyframes floatY { 0%,100%{transform:translateY(-50%)} 50%{transform:translateY(calc(-50% - 10px))} }
+    .float-code { animation: floatY 5s ease-in-out infinite; }
+    /* Skill tag hover */
+    .skill-tag { transition: border-color .2s, color .2s, box-shadow .2s; cursor: default; }
+    .skill-tag:hover { box-shadow: 0 0 8px rgba(142,213,255,0.25); }
+    /* Back to top */
+    #back-top { opacity: 0; pointer-events: none; transition: opacity .3s; }
+    #back-top.show { opacity: 1; pointer-events: auto; }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0b1220; }
+    ::-webkit-scrollbar-thumb { background: #8ed5ff; border-radius: 2px; }
+    /* Glassmorphism mouse glow */
+    .glass-card { position: relative; overflow: hidden; }
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(142,213,255,0.07), transparent 70%);
+      transform: translate(var(--mx, -999px), var(--my, -999px)) translate(-50%, -50%);
+      pointer-events: none; transition: transform .05s; z-index: 0; border-radius: 50%;
+    }
+    .glass-card > * { position: relative; z-index: 1; }
+    @media(prefers-reduced-motion:reduce) {
+      *, *::before, *::after { animation-duration:.01ms!important; transition-duration:.01ms!important; }
+    }
+  </style>
+</head>
+<body class="overflow-x-hidden">
+
+<!-- ── Scroll Progress ── -->
+<div id="scroll-bar"></div>
+
+<!-- ── NAV ── -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/20 h-16" id="main-nav">
+  <div class="flex justify-between items-center px-margin-mobile md:px-gutter max-w-container-max mx-auto h-full">
+    <a class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight" href="#">Yousef Odeh</a>
+
+    <!-- Desktop links -->
+    <div class="hidden md:flex gap-8 items-center">
+      <a class="nav-link text-on-surface-variant hover:text-primary transition-colors duration-200 text-body-md" href="#about">About</a>
+      <a class="nav-link text-on-surface-variant hover:text-primary transition-colors duration-200 text-body-md" href="#projects">Projects</a>
+      <a class="nav-link text-on-surface-variant hover:text-primary transition-colors duration-200 text-body-md" href="#achievements">Achievements</a>
+      <a class="nav-link text-on-surface-variant hover:text-primary transition-colors duration-200 text-body-md" href="#skills">Skills</a>
+      <a class="nav-link text-on-surface-variant hover:text-primary transition-colors duration-200 text-body-md" href="#experience">Experience</a>
+      <a class="nav-link text-on-surface-variant hover:text-primary transition-colors duration-200 text-body-md" href="#contact">Contact</a>
+      <a href="../Yousef_Odeh_Resume_v3.pdf" download
+         class="bg-primary-container text-on-primary-container px-6 py-2 rounded-lg font-bold hover:bg-primary transition-all duration-200 flex items-center gap-2 text-sm">
+        <span class="material-symbols-outlined text-base">download</span>Resume
+      </a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button id="hamburger" class="md:hidden text-primary p-1" aria-label="Menu">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="flex-col bg-surface/95 backdrop-blur-xl border-b border-outline-variant/20 px-margin-mobile py-4 gap-4 md:hidden">
+    <a class="nav-link text-on-surface-variant hover:text-primary py-2" href="#about">About</a>
+    <a class="nav-link text-on-surface-variant hover:text-primary py-2" href="#projects">Projects</a>
+    <a class="nav-link text-on-surface-variant hover:text-primary py-2" href="#achievements">Achievements</a>
+    <a class="nav-link text-on-surface-variant hover:text-primary py-2" href="#skills">Skills</a>
+    <a class="nav-link text-on-surface-variant hover:text-primary py-2" href="#experience">Experience</a>
+    <a class="nav-link text-on-surface-variant hover:text-primary py-2" href="#contact">Contact</a>
+    <a href="../Yousef_Odeh_Resume_v3.pdf" download class="bg-primary-container text-on-primary-container px-5 py-2 rounded-lg font-bold text-sm w-fit">⬇ Resume</a>
+  </div>
+</nav>
+
+<!-- ── MAIN ── -->
+<main class="dot-grid pt-16">
+
+  <!-- ══ HERO ══ -->
+  <section class="relative min-h-[90vh] flex items-center overflow-hidden" id="hero">
+    <!-- Glow blobs -->
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 blur-[130px] rounded-full -z-10 animate-pulse"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-72 h-72 bg-secondary/10 blur-[110px] rounded-full -z-10"></div>
+    <div class="absolute top-3/4 left-1/2 w-48 h-48 bg-tertiary/5 blur-[80px] rounded-full -z-10"></div>
+
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter w-full">
+      <div class="max-w-3xl">
+        <!-- Available badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-secondary-container/10 border border-secondary/25 rounded-full mb-6">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+          </span>
+          <span class="font-label-mono text-label-mono text-secondary">Available for Internships</span>
+        </div>
+
+        <h1 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl mb-4 leading-tight text-on-surface">
+          Hi, I'm <span class="text-primary text-glow">Yousef Odeh</span>
+        </h1>
+
+        <h2 class="font-headline-md text-headline-md text-on-surface-variant mb-4">
+          <span id="typed-role"></span><span class="tw-cursor"></span>
+        </h2>
+
+        <p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-2xl">
+          I build practical software systems, web applications, and algorithmic solutions with a focus on performance and precision — from competitive programming contests to full-stack database-driven apps.
+        </p>
+
+        <div class="flex flex-wrap gap-4 items-center">
+          <a class="bg-primary text-on-primary font-bold px-8 py-4 rounded-xl flex items-center gap-2 hover:scale-105 hover:shadow-[0_0_20px_rgba(56,189,248,0.35)] transition-all duration-200" href="#projects">
+            View Projects
+            <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </a>
+          <a class="border border-outline-variant hover:border-primary px-8 py-4 rounded-xl font-bold transition-all duration-200 text-on-surface-variant hover:text-primary" href="#contact">
+            Contact Me
+          </a>
+          <div class="flex gap-3 ml-1">
+            <a class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-lg hover:bg-surface-container" href="https://github.com/yousefammmar" target="_blank" rel="noopener" title="GitHub">
+              <span class="material-symbols-outlined">code</span>
+            </a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-lg hover:bg-surface-container" href="https://www.linkedin.com/in/yousef-odeh-941257330/" target="_blank" rel="noopener" title="LinkedIn">
+              <span class="material-symbols-outlined">share</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating code card -->
+    <div class="hidden lg:block absolute right-12 top-1/2 float-code w-[380px] glass-card rounded-xl p-6 font-label-mono text-label-mono shadow-2xl border border-outline-variant/20">
+      <div class="flex items-center gap-2 mb-4 border-b border-outline-variant/30 pb-3">
+        <span class="w-3 h-3 rounded-full bg-red-500/50"></span>
+        <span class="w-3 h-3 rounded-full bg-yellow-500/50"></span>
+        <span class="w-3 h-3 rounded-full bg-green-500/50"></span>
+        <span class="ml-2 text-on-surface-variant/40 text-xs">portfolio.cpp</span>
+      </div>
+      <div class="space-y-1 text-sm leading-7">
+        <p><span class="text-tertiary">#include</span> <span class="text-secondary">&lt;iostream&gt;</span></p>
+        <p><span class="text-tertiary">#include</span> <span class="text-secondary">&lt;ambition&gt;</span></p>
+        <p class="text-on-surface-variant/60">// PSUT · Batch 2027</p>
+        <p><span class="text-primary">int</span> <span class="text-secondary">main</span>() {</p>
+        <p class="pl-4 text-on-surface-variant">Developer <span class="text-primary">yousef</span>;</p>
+        <p class="pl-4 text-on-surface-variant">yousef.setFocus(<span class="text-tertiary">"Scalable&nbsp;Systems"</span>);</p>
+        <p class="pl-4 text-on-surface-variant">yousef.compete(<span class="text-tertiary">"JCPC, PCPC"</span>);</p>
+        <p class="pl-4 text-on-surface-variant">yousef.teach(<span class="text-tertiary">"OOP @ PSUT"</span>);</p>
+        <p class="pl-4"><span class="text-primary">return</span> <span class="text-tertiary">0</span>;</p>
+        <p class="text-primary">}</p>
+      </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-on-surface-variant/40 text-xs font-label-mono animate-bounce">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+      scroll
+    </div>
+  </section>
+
+  <!-- ══ ABOUT ══ -->
+  <section class="py-stack-lg fade-section" id="about">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+
+        <!-- Photo -->
+        <div class="relative group order-2 md:order-1">
+          <div class="absolute -inset-4 bg-primary/15 rounded-2xl blur-2xl group-hover:bg-primary/25 transition-all duration-500"></div>
+          <div class="relative rounded-2xl overflow-hidden border border-outline-variant/30 aspect-square bg-surface-container-high flex items-center justify-center">
+            <!-- Initials avatar as fallback / primary display -->
+            <div class="flex flex-col items-center gap-4">
+              <div class="w-32 h-32 rounded-full border-2 border-primary/30 flex items-center justify-center overflow-hidden">
+                <img src="profile.png" alt="Yousef Odeh" class="w-full h-full object-cover">
+              </div>
+              <div class="text-center px-8">
+                <p class="text-on-surface-variant text-sm font-label-mono text-label-mono">📍 Amman, Jordan</p>
+                <p class="text-on-surface-variant/60 text-xs mt-1">PSUT — Software Engineering</p>
+              </div>
+              <!-- Quick stats -->
+              <div class="flex gap-8 pt-2">
+                <div class="text-center">
+                  <p class="text-primary font-bold text-2xl">3+</p>
+                  <p class="text-on-surface-variant/60 text-xs font-label-mono">CP Contests</p>
+                </div>
+                <div class="text-center">
+                  <p class="text-secondary font-bold text-2xl">5+</p>
+                  <p class="text-on-surface-variant/60 text-xs font-label-mono">Projects</p>
+                </div>
+                <div class="text-center">
+                  <p class="text-tertiary font-bold text-2xl">3</p>
+                  <p class="text-on-surface-variant/60 text-xs font-label-mono">Certs</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bio -->
+        <div class="order-1 md:order-2">
+          <h2 class="font-headline-lg text-headline-lg mb-6 flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">person</span>
+            About Me
+          </h2>
+          <div class="space-y-5 text-on-surface-variant leading-relaxed">
+            <p class="font-body-lg text-body-lg">
+              I'm a motivated 2nd-year Software Engineering student at <strong class="text-on-surface">Princess Sumaya University for Technology (PSUT)</strong>, with a strong foundation in algorithms, data structures, and full-stack development.
+            </p>
+            <p class="font-body-lg text-body-lg">
+              I'm an active competitive programmer on <strong class="text-primary">Codeforces</strong>, have represented PSUT in national contests (JCPC, PCPC, Amman CPC), and currently serve as a Teaching Assistant for the OOP course. I enjoy bridging low-level algorithmic efficiency with high-level user experience.
+            </p>
+
+            <!-- Education card -->
+            <div class="flex items-center gap-4 bg-surface-container/60 border border-outline-variant/20 rounded-xl px-5 py-4 mt-2">
+              <span class="text-2xl">🎓</span>
+              <div>
+                <p class="text-xs font-label-mono text-primary uppercase tracking-widest mb-0.5">Education</p>
+                <p class="text-on-surface font-semibold text-sm">B.Sc. Software Engineering — PSUT</p>
+                <p class="text-on-surface-variant text-xs">Expected June 2027 · Amman, Jordan</p>
+              </div>
+            </div>
+
+            <!-- CV download -->
+            <a href="../Yousef_Odeh_Resume_v3.pdf" download
+               class="flex items-center gap-4 bg-tertiary/5 border border-tertiary/20 rounded-xl px-5 py-4 hover:border-tertiary/40 hover:bg-tertiary/10 hover:translate-x-1 transition-all duration-200 group/cv">
+              <span class="text-2xl">📄</span>
+              <div class="flex-1">
+                <p class="text-xs font-label-mono text-tertiary uppercase tracking-widest mb-0.5">Curriculum Vitae</p>
+                <p class="text-on-surface-variant text-sm">Download Yousef's full CV — updated 2026</p>
+              </div>
+              <span class="text-tertiary group-hover/cv:translate-y-0.5 transition-transform">↓</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PROJECTS ══ -->
+  <section class="py-stack-lg bg-surface-container-low/30 fade-section" id="projects">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+      <div class="flex justify-between items-end mb-12">
+        <div>
+          <h2 class="font-headline-lg text-headline-lg mb-2">Featured Projects</h2>
+          <p class="text-on-surface-variant">Academic and personal engineering ventures.</p>
+        </div>
+        <a class="hidden md:flex items-center gap-2 text-primary hover:underline font-bold text-sm" href="https://github.com/yousefammmar" target="_blank" rel="noopener">
+          View All on GitHub
+          <span class="material-symbols-outlined text-base">open_in_new</span>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+
+        <!-- ① Hospital Management — Featured wide -->
+        <div class="md:col-span-8 group glass-card rounded-2xl overflow-hidden hover-glow transition-all duration-300">
+          <div class="grid md:grid-cols-2 h-full">
+            <div class="p-8">
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full border border-primary/20 font-label-mono">MySQL</span>
+                <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full border border-primary/20 font-label-mono">Oracle SQL</span>
+                <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full border border-primary/20 font-label-mono">PHP</span>
+                <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full border border-primary/20 font-label-mono">JavaScript</span>
+              </div>
+              <h3 class="font-headline-md text-headline-md mb-3">Hospital Management System</h3>
+              <p class="text-on-surface-variant mb-6 text-body-md">
+                Full-stack relational database platform covering patient admission, room management, staff scheduling, and vital sign monitoring. Designed complete schema from EER diagram through 3NF normalization.
+              </p>
+              <div class="flex gap-3">
+                <a href="https://github.com/yousefammmar" target="_blank" rel="noopener"
+                   class="bg-surface-bright px-4 py-2 rounded-lg hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <span class="material-symbols-outlined text-base">code</span>Code
+                </a>
+              </div>
+            </div>
+            <!-- Project visual -->
+            <div class="bg-surface-container-highest relative overflow-hidden h-56 md:h-auto flex items-center justify-center">
+              <div class="text-center p-6">
+                <div class="text-6xl mb-3">🏥</div>
+                <div class="font-label-mono text-xs text-on-surface-variant/60 space-y-1">
+                  <div class="flex items-center gap-2 bg-surface-container/60 rounded px-3 py-1.5 text-left">
+                    <span class="w-2 h-2 rounded-full bg-secondary inline-block"></span>
+                    <span>Patient records DB</span>
+                  </div>
+                  <div class="flex items-center gap-2 bg-surface-container/60 rounded px-3 py-1.5 text-left">
+                    <span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+                    <span>Room scheduling</span>
+                  </div>
+                  <div class="flex items-center gap-2 bg-surface-container/60 rounded px-3 py-1.5 text-left">
+                    <span class="w-2 h-2 rounded-full bg-tertiary inline-block"></span>
+                    <span>Staff management</span>
+                  </div>
+                </div>
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 group-hover:from-primary/10 group-hover:to-secondary/10 transition-all duration-700"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ② MindBloom -->
+        <div class="md:col-span-4 glass-card rounded-2xl p-8 hover-glow transition-all duration-300 flex flex-col">
+          <div class="flex justify-between items-start mb-5">
+            <div class="p-3 bg-secondary/10 rounded-xl">
+              <span class="material-symbols-outlined text-secondary text-2xl">psychology</span>
+            </div>
+            <span class="text-xs text-on-surface-variant font-label-mono bg-surface-container/50 px-2 py-1 rounded">Web App</span>
+          </div>
+          <h3 class="font-headline-md text-headline-md mb-2">MindBloom</h3>
+          <p class="text-on-surface-variant text-body-md flex-grow">Academic schedule planner with calendar interface, categorized events (lectures, assignments, exams), and local-storage persistence. Deployed publicly.</p>
+          <div class="mt-6 flex flex-wrap gap-2">
+            <span class="text-xs font-label-mono bg-outline-variant/20 px-2 py-1 rounded text-on-surface-variant">HTML5</span>
+            <span class="text-xs font-label-mono bg-outline-variant/20 px-2 py-1 rounded text-on-surface-variant">CSS3</span>
+            <span class="text-xs font-label-mono bg-outline-variant/20 px-2 py-1 rounded text-on-surface-variant">ES6</span>
+          </div>
+          <a href="https://yousefammmar.github.io/MindBloom" target="_blank" rel="noopener"
+             class="mt-4 flex items-center gap-2 text-secondary text-sm font-bold hover:underline">
+            <span class="material-symbols-outlined text-base">open_in_new</span>Live Demo
+          </a>
+        </div>
+
+        <!-- ③ Potato Runner -->
+        <div class="md:col-span-4 glass-card rounded-2xl p-8 hover-glow transition-all duration-300 border-l-4 border-tertiary">
+          <div class="mb-5">
+            <span class="material-symbols-outlined text-tertiary text-4xl">sports_esports</span>
+          </div>
+          <h3 class="font-headline-md text-headline-md mb-2">Potato Runner</h3>
+          <p class="text-on-surface-variant text-body-md">Fully playable maze-escape game with procedurally generated mazes via recursive backtracking, three difficulty levels, smooth animation, and real-time move/time tracking.</p>
+          <div class="mt-5 flex items-center justify-between">
+            <span class="font-label-mono text-tertiary text-sm">Python / Pygame</span>
+            <a href="https://github.com/yousefammmar" target="_blank" rel="noopener" class="text-primary hover:text-secondary transition-colors">
+              <span class="material-symbols-outlined">play_circle</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- ④ Car Dealership CMS -->
+        <div class="md:col-span-4 glass-card rounded-2xl p-8 hover-glow transition-all duration-300">
+          <div class="mb-5">
+            <span class="material-symbols-outlined text-primary text-4xl">directions_car</span>
+          </div>
+          <h3 class="font-headline-md text-headline-md mb-2">Dealership CMS</h3>
+          <p class="text-on-surface-variant text-body-md">Console-based management system using C++ with full OOP design — encapsulation, inheritance, polymorphism, and dynamic memory management.</p>
+          <div class="mt-5 bg-surface-container rounded-lg p-3 font-label-mono text-xs text-on-surface-variant">
+            <span class="text-primary">class</span> Car : <span class="text-secondary">public</span> Vehicle {…}
+          </div>
+        </div>
+
+        <!-- ⑤ SkyCast -->
+        <div class="md:col-span-4 glass-card rounded-2xl p-8 hover-glow transition-all duration-300">
+          <div class="mb-5">
+            <span class="material-symbols-outlined text-secondary text-4xl">cloud</span>
+          </div>
+          <h3 class="font-headline-md text-headline-md mb-2">SkyCast</h3>
+          <p class="text-on-surface-variant text-body-md">Responsive weather dashboard with live API data, 5-day forecasts, and °C/°F unit conversion. Clean card-based UI with animated weather icons.</p>
+          <div class="mt-5 flex gap-2">
+            <span class="w-2 h-2 rounded-full bg-secondary"></span>
+            <span class="w-2 h-2 rounded-full bg-secondary/60"></span>
+            <span class="w-2 h-2 rounded-full bg-secondary/30"></span>
+            <span class="ml-auto text-xs font-label-mono text-on-surface-variant">HTML · CSS · JS</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ACHIEVEMENTS ══ -->
+  <section class="py-stack-lg fade-section" id="achievements">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+      <div class="text-center mb-16">
+        <h2 class="font-headline-lg text-headline-lg mb-4">Competitive Programming</h2>
+        <p class="text-on-surface-variant max-w-2xl mx-auto font-body-lg">Competing at the highest levels of algorithmic problem-solving within Jordan and the MENA region.</p>
+      </div>
+
+      <!-- Contest cards -->
+      <div class="grid md:grid-cols-3 gap-6 mb-16">
+        <!-- PCPC 2026 -->
+        <div class="relative p-8 rounded-2xl bg-surface-container-high border-t-2 border-primary overflow-hidden hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(142,213,255,0.12)]">
+          <div class="absolute -right-4 -top-4 opacity-5 rotate-12">
+            <span class="material-symbols-outlined" style="font-size:120px">emoji_events</span>
+          </div>
+          <p class="font-label-mono text-primary mb-1 text-sm">PCPC 2026</p>
+          <p class="font-headline-md text-headline-md mb-1">29<sup class="text-sm">th</sup> / 61</p>
+          <p class="text-xs font-label-mono text-on-surface-variant mb-3">PSUT Collegiate Programming Contest</p>
+          <p class="text-on-surface-variant text-body-md">Qualified and competed in the PSUT internal collegiate programming contest, demonstrating high-speed algorithmic problem-solving skills.</p>
+        </div>
+        <!-- JCPC 2025 -->
+        <div class="relative p-8 rounded-2xl bg-surface-container-high border-t-2 border-secondary overflow-hidden hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(69,223,164,0.12)]">
+          <div class="absolute -right-4 -top-4 opacity-5 rotate-12">
+            <span class="material-symbols-outlined" style="font-size:120px">stars</span>
+          </div>
+          <p class="font-label-mono text-secondary mb-1 text-sm">JCPC 2025</p>
+          <p class="font-headline-md text-headline-md mb-1">65<sup class="text-sm">th</sup> / 100</p>
+          <p class="text-xs font-label-mono text-on-surface-variant mb-3">Jordanian Collegiate Programming Contest</p>
+          <p class="text-on-surface-variant text-body-md">National-level recognition in the premier Jordanian programming contest, competing against top universities across Jordan.</p>
+        </div>
+        <!-- Amman CPC 2025 -->
+        <div class="relative p-8 rounded-2xl bg-surface-container-high border-t-2 border-tertiary overflow-hidden hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(245,200,12,0.10)]">
+          <div class="absolute -right-4 -top-4 opacity-5 rotate-12">
+            <span class="material-symbols-outlined" style="font-size:120px">workspace_premium</span>
+          </div>
+          <p class="font-label-mono text-tertiary mb-1 text-sm">Amman CPC 2025</p>
+          <p class="font-headline-md text-headline-md mb-1">55<sup class="text-sm">th</sup> / 75</p>
+          <p class="text-xs font-label-mono text-on-surface-variant mb-3">Amman City Programming Challenge</p>
+          <p class="text-on-surface-variant text-body-md">Distinguished performance in the city-wide competitive programming challenge hosted by industry leaders in Amman.</p>
+        </div>
+      </div>
+
+      <!-- Certifications -->
+      <h3 class="font-headline-md text-headline-md mb-8 text-center">Certifications</h3>
+      <div class="grid md:grid-cols-3 gap-5">
+        <!-- AWS -->
+        <div class="glass-card rounded-2xl p-6 text-center hover-glow transition-all duration-300">
+          <div class="text-4xl mb-4">☁️</div>
+          <h4 class="font-label-mono text-sm font-bold text-on-surface mb-1">DevOps on AWS &amp; Project Management</h4>
+          <p class="text-xs font-label-mono text-on-surface-variant mb-3">Amazon Web Services</p>
+          <span class="inline-block text-xs font-label-mono px-3 py-1 rounded-full bg-secondary/10 border border-secondary/30 text-secondary">2025</span>
+        </div>
+        <!-- Data Science -->
+        <div class="glass-card rounded-2xl p-6 text-center hover-glow transition-all duration-300">
+          <div class="text-4xl mb-4">📊</div>
+          <h4 class="font-label-mono text-sm font-bold text-on-surface mb-1">Data Science &amp; AI</h4>
+          <p class="text-xs font-label-mono text-on-surface-variant mb-3">Princess Sumaya University</p>
+          <span class="inline-block text-xs font-label-mono px-3 py-1 rounded-full bg-primary/10 border border-primary/30 text-primary">2024</span>
+        </div>
+        <!-- Web Design -->
+        <div class="glass-card rounded-2xl p-6 text-center hover-glow transition-all duration-300">
+          <div class="text-4xl mb-4">🎨</div>
+          <h4 class="font-label-mono text-sm font-bold text-on-surface mb-1">Web Design</h4>
+          <p class="text-xs font-label-mono text-on-surface-variant mb-3">Princess Sumaya University</p>
+          <span class="inline-block text-xs font-label-mono px-3 py-1 rounded-full bg-tertiary/10 border border-tertiary/30 text-tertiary">2021</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SKILLS ══ -->
+  <section class="py-stack-lg bg-surface-container-lowest fade-section" id="skills">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+      <h2 class="font-headline-lg text-headline-lg mb-12 border-l-4 border-primary pl-6">Technical Arsenal</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-10">
+
+        <!-- Languages -->
+        <div>
+          <h3 class="font-label-mono text-on-surface mb-5 flex items-center gap-2 text-sm uppercase tracking-widest">
+            <span class="material-symbols-outlined text-primary text-lg">terminal</span>Languages
+          </h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-primary/50 hover:text-primary">C</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-primary/50 hover:text-primary">C++</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-primary/50 hover:text-primary">Java</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-primary/50 hover:text-primary">Python</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-primary/50 hover:text-primary">C#</span>
+          </div>
+        </div>
+
+        <!-- Web Tech -->
+        <div>
+          <h3 class="font-label-mono text-on-surface mb-5 flex items-center gap-2 text-sm uppercase tracking-widest">
+            <span class="material-symbols-outlined text-secondary text-lg">html</span>Web Tech
+          </h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-secondary/50 hover:text-secondary">HTML5</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-secondary/50 hover:text-secondary">CSS3</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-secondary/50 hover:text-secondary">JavaScript</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-secondary/50 hover:text-secondary">PHP</span>
+          </div>
+        </div>
+
+        <!-- Databases -->
+        <div>
+          <h3 class="font-label-mono text-on-surface mb-5 flex items-center gap-2 text-sm uppercase tracking-widest">
+            <span class="material-symbols-outlined text-tertiary text-lg">database</span>Databases
+          </h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-tertiary/50 hover:text-tertiary">MySQL</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-tertiary/50 hover:text-tertiary">Oracle SQL</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-tertiary/50 hover:text-tertiary">PL/SQL</span>
+          </div>
+        </div>
+
+        <!-- Tools -->
+        <div>
+          <h3 class="font-label-mono text-on-surface mb-5 flex items-center gap-2 text-sm uppercase tracking-widest">
+            <span class="material-symbols-outlined text-primary text-lg">build</span>Tools
+          </h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-primary/50 hover:text-primary">Git / GitHub</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-primary/50 hover:text-primary">Linux</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-primary/50 hover:text-primary">Arduino</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-primary/50 hover:text-primary">EMU 8086</span>
+          </div>
+        </div>
+
+        <!-- Core Concepts -->
+        <div class="lg:col-span-2">
+          <h3 class="font-label-mono text-on-surface mb-5 flex items-center gap-2 text-sm uppercase tracking-widest">
+            <span class="material-symbols-outlined text-secondary text-lg">schema</span>Core Concepts
+          </h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-secondary/50 hover:text-secondary">OOP</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-secondary/50 hover:text-secondary">Data Structures</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-secondary/50 hover:text-secondary">Algorithms</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-secondary/50 hover:text-secondary">Competitive Programming</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-secondary/50 hover:text-secondary">Embedded Systems</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-secondary/50 hover:text-secondary">Database Design</span>
+            <span class="skill-tag px-4 py-2 bg-surface-container rounded-lg border border-outline-variant/30 font-label-mono text-sm text-on-surface-variant hover:border-secondary/50 hover:text-secondary">Software Engineering</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ EXPERIENCE ══ -->
+  <section class="py-stack-lg fade-section" id="experience">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+      <div class="flex items-center gap-4 mb-12">
+        <h2 class="font-headline-lg text-headline-lg">Experience</h2>
+        <div class="flex-grow h-px bg-outline-variant/20"></div>
+      </div>
+
+      <div class="space-y-12">
+        <!-- Teaching Assistant -->
+        <div class="flex flex-col md:flex-row gap-6 md:gap-12 group">
+          <div class="md:w-1/4">
+            <p class="font-label-mono text-primary text-sm">Feb 2026 — May 2026</p>
+            <p class="text-xs text-on-surface-variant mt-1">Academic Role</p>
+          </div>
+          <div class="md:w-3/4 pb-12 border-l border-outline-variant/30 pl-8 relative">
+            <div class="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-primary group-hover:scale-150 transition-transform duration-300 shadow-[0_0_8px_rgba(142,213,255,0.6)]"></div>
+            <h3 class="font-headline-md text-headline-md mb-1">Teaching Assistant — OOP (C++)</h3>
+            <p class="text-secondary font-label-mono text-sm mb-4">Princess Sumaya University for Technology · Amman, Jordan</p>
+            <p class="text-on-surface-variant text-body-md mb-5">
+              Supported the undergraduate Object-Oriented Programming course (C++). Responsible for clarifying core concepts — classes, inheritance, polymorphism, encapsulation — and helping students debug complex programs.
+            </p>
+            <ul class="space-y-3 text-on-surface-variant">
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary text-sm mt-0.5 flex-shrink-0">check_circle</span>
+                <span class="text-body-md">Conducted lab sessions and one-on-one debugging support for 40+ undergraduate students.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary text-sm mt-0.5 flex-shrink-0">check_circle</span>
+                <span class="text-body-md">Reviewed and graded programming assignments with focus on memory efficiency and proper design patterns.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary text-sm mt-0.5 flex-shrink-0">check_circle</span>
+                <span class="text-body-md">Prepared supplemental code examples and explanations to reinforce lecture material.</span>
+              </li>
+            </ul>
+            <div class="flex flex-wrap gap-2 mt-5">
+              <span class="text-xs font-label-mono bg-primary/10 border border-primary/20 text-primary px-3 py-1 rounded-full">C++</span>
+              <span class="text-xs font-label-mono bg-primary/10 border border-primary/20 text-primary px-3 py-1 rounded-full">OOP</span>
+              <span class="text-xs font-label-mono bg-primary/10 border border-primary/20 text-primary px-3 py-1 rounded-full">Teaching</span>
+              <span class="text-xs font-label-mono bg-primary/10 border border-primary/20 text-primary px-3 py-1 rounded-full">PSUT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTACT ══ -->
+  <section class="py-stack-lg fade-section" id="contact">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+      <div class="glass-card rounded-3xl p-8 md:p-16 text-center relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-72 h-72 bg-primary/10 blur-[100px] -z-10"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 bg-secondary/8 blur-[80px] -z-10"></div>
+
+        <div class="max-w-2xl mx-auto">
+          <h2 class="font-headline-xl text-headline-xl mb-6 text-on-surface">
+            Let's build something <span class="text-secondary">exceptional</span>.
+          </h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant mb-10">
+            I'm actively looking for internship opportunities and interesting software projects to contribute to. Open to collaborations, technical discussions, or just a friendly chat!
+          </p>
+
+          <div class="flex flex-col md:flex-row gap-4 justify-center mb-10">
+            <a class="bg-primary text-on-primary font-bold px-10 py-4 rounded-xl flex items-center justify-center gap-3 hover:shadow-[0_0_24px_rgba(56,189,248,0.4)] hover:scale-105 transition-all duration-200"
+               href="mailto:you20240781@std.psut.edu.jo">
+              <span class="material-symbols-outlined">mail</span>
+              Email Me
+            </a>
+            <div class="flex gap-3 justify-center">
+              <a class="p-4 bg-surface-bright rounded-xl hover:text-primary transition-colors border border-outline-variant/30 hover:border-primary/40 hover:shadow-[0_0_16px_rgba(56,189,248,0.15)]"
+                 href="https://github.com/yousefammmar" target="_blank" rel="noopener" title="GitHub">
+                <span class="material-symbols-outlined">code</span>
+              </a>
+              <a class="p-4 bg-surface-bright rounded-xl hover:text-secondary transition-colors border border-outline-variant/30 hover:border-secondary/40"
+                 href="https://www.linkedin.com/in/yousef-odeh-941257330/" target="_blank" rel="noopener" title="LinkedIn">
+                <span class="material-symbols-outlined">share</span>
+              </a>
+              <a class="p-4 bg-surface-bright rounded-xl hover:text-tertiary transition-colors border border-outline-variant/30 hover:border-tertiary/40"
+                 href="tel:+962782534394" title="Call">
+                <span class="material-symbols-outlined">phone</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Contact details -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-left">
+            <a href="mailto:you20240781@std.psut.edu.jo" class="flex items-center gap-3 bg-surface-container/50 rounded-xl px-4 py-3 hover:bg-surface-container hover:text-primary transition-all group/c">
+              <span class="material-symbols-outlined text-primary text-lg">mail</span>
+              <div>
+                <p class="text-xs font-label-mono text-primary uppercase tracking-wider">Email</p>
+                <p class="text-sm text-on-surface-variant group-hover/c:text-on-surface transition-colors">you20240781@std.psut.edu.jo</p>
+              </div>
+            </a>
+            <a href="tel:+962782534394" class="flex items-center gap-3 bg-surface-container/50 rounded-xl px-4 py-3 hover:bg-surface-container hover:text-secondary transition-all group/c">
+              <span class="material-symbols-outlined text-secondary text-lg">phone</span>
+              <div>
+                <p class="text-xs font-label-mono text-secondary uppercase tracking-wider">Phone</p>
+                <p class="text-sm text-on-surface-variant group-hover/c:text-on-surface transition-colors">+962 782 534 394</p>
+              </div>
+            </a>
+            <a href="https://github.com/yousefammmar" target="_blank" rel="noopener" class="flex items-center gap-3 bg-surface-container/50 rounded-xl px-4 py-3 hover:bg-surface-container hover:text-primary transition-all group/c">
+              <span class="material-symbols-outlined text-primary text-lg">code</span>
+              <div>
+                <p class="text-xs font-label-mono text-primary uppercase tracking-wider">GitHub</p>
+                <p class="text-sm text-on-surface-variant group-hover/c:text-on-surface transition-colors">github.com/yousefammmar</p>
+              </div>
+            </a>
+            <a href="https://www.linkedin.com/in/yousef-odeh-941257330/" target="_blank" rel="noopener" class="flex items-center gap-3 bg-surface-container/50 rounded-xl px-4 py-3 hover:bg-surface-container hover:text-secondary transition-all group/c">
+              <span class="material-symbols-outlined text-secondary text-lg">share</span>
+              <div>
+                <p class="text-xs font-label-mono text-secondary uppercase tracking-wider">LinkedIn</p>
+                <p class="text-sm text-on-surface-variant group-hover/c:text-on-surface transition-colors">linkedin.com/in/yousef-odeh-941257330</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer class="bg-surface-container-lowest py-stack-md border-t border-outline-variant/10">
+  <div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-gutter max-w-container-max mx-auto gap-6">
+    <div class="flex flex-col items-center md:items-start">
+      <span class="font-label-mono text-label-mono text-on-surface mb-1">Yousef Odeh</span>
+      <p class="text-xs text-on-surface-variant">© 2026 Yousef Odeh. Built with precision.</p>
+    </div>
+    <div class="flex gap-8">
+      <a class="text-xs text-on-surface-variant hover:text-secondary-fixed-dim transition-colors" href="https://github.com/yousefammmar" target="_blank" rel="noopener">GitHub</a>
+      <a class="text-xs text-on-surface-variant hover:text-secondary-fixed-dim transition-colors" href="https://www.linkedin.com/in/yousef-odeh-941257330/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="text-xs text-on-surface-variant hover:text-secondary-fixed-dim transition-colors" href="mailto:you20240781@std.psut.edu.jo">Email</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ── BACK TO TOP ── -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+  class="fixed bottom-6 right-6 z-50 w-11 h-11 bg-primary/20 border border-primary/30 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-all duration-200 backdrop-blur-sm shadow-lg">
+  <span class="material-symbols-outlined text-base">arrow_upward</span>
+</button>
+
+<script>
+(function(){
+  // ── Scroll progress bar ──
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+    document.getElementById('scroll-bar').style.width = (scrolled * 100) + '%';
+    document.getElementById('back-top').classList.toggle('show', window.scrollY > 400);
+  }, { passive: true });
+
+  // ── Mobile nav ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  document.querySelectorAll('#mobile-menu .nav-link').forEach(l =>
+    l.addEventListener('click', () => mobileMenu.classList.remove('open'))
+  );
+
+  // ── Typewriter ──
+  (function(){
+    const el = document.getElementById('typed-role');
+    if (!el) return;
+    const phrases = [
+      'Software Engineering Student',
+      'Full-Stack Developer',
+      'Competitive Programmer',
+      'Teaching Assistant @ PSUT',
+    ];
+    let pi = 0, ci = 0, del = false;
+    function tick() {
+      const phrase = phrases[pi];
+      if (!del) {
+        el.textContent = phrase.slice(0, ++ci);
+        if (ci === phrase.length) { del = true; setTimeout(tick, 2000); return; }
+      } else {
+        el.textContent = phrase.slice(0, --ci);
+        if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; setTimeout(tick, 300); return; }
+      }
+      setTimeout(tick, del ? 38 : 72);
+    }
+    setTimeout(tick, 800);
+  })();
+
+  // ── ScrollSpy ──
+  const navLinks = document.querySelectorAll('nav .nav-link');
+  const sections = document.querySelectorAll('section[id]');
+  const spyObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navLinks.forEach(l => {
+          const active = l.getAttribute('href') === '#' + id;
+          l.classList.toggle('text-primary', active);
+          l.classList.toggle('font-bold', active);
+          l.classList.toggle('text-on-surface-variant', !active);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -55% 0px' });
+  sections.forEach(s => spyObs.observe(s));
+
+  // ── Fade-in sections on scroll ──
+  const fadeEls = document.querySelectorAll('.fade-section');
+  const fadeObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  fadeEls.forEach(el => fadeObs.observe(el));
+
+  // ── Glass card mouse glow ──
+  document.querySelectorAll('.glass-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.setProperty('--mx', '-999px');
+      card.style.setProperty('--my', '-999px');
+    });
+  });
+})();
+</script>
+</body>
+</html>
