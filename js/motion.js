@@ -37,10 +37,10 @@ input.addEventListener('blur', () => { typing = !input.value; });
 const routes = [
   { re: /\b(cv|resume|résumé|download)\b/, action: 'cv' },
   { re: /contact|e-?mail|hire|phone|reach|linkedin|github|talk/, id: 'contact', label: 'Contact', pulse: '.contact' },
+  { re: /proj|work|built|build|made|hospital|mind|potato|maze|sky|weather|app|demo|javazero|jsverse|mlverse|coffee|game|machine learning/, id: 'work', label: 'Projects', pulse: '.tile' },
   { re: /skill|stack|language|python|java|c\+\+|php|sql|git|linux|tool|tech|database/, id: 'about', scrollTo: '.skills', label: 'Skills', pulse: '.skills .panel' },
   { re: /contest|cpc|compet|icpc|train|aws|devops|data science|award/, id: 'contests', label: 'Contests & training', pulse: '#contests .panel' },
   { re: /exper|teach|\bta\b|assistant|job|psut|educat|degree|univers|class|study/, id: 'experience', label: 'Experience', pulse: '.rowx' },
-  { re: /proj|work|built|build|made|hospital|mind|potato|maze|sky|weather|app|demo/, id: 'work', label: 'Projects', pulse: '.tile' },
   { re: /about|who|photo|bio|summary|yousef/, id: 'about', label: 'About', pulse: '.about__photo, .about__copy' },
 ];
 const hint = $('#askHint');

@@ -101,6 +101,7 @@ h3 span { display: block; margin-top: 0.15rem; font-size: 0.9rem; font-weight: 4
 .tile--mind { grid-column: span 2; align-content: start; }
 .tile--potato { grid-column: span 3; }
 .tile--sky { grid-column: span 3; }
+.tile--half { grid-column: span 3; }
 .tile__art { display: grid; gap: 0.6rem; justify-items: center; align-content: center; color: var(--muted); position: relative; }
 .tile__art svg { width: 100%; height: auto; max-width: 22rem; }
 .tile__art figcaption, .tile__note { font: 400 0.75rem/1.4 var(--mono); color: var(--muted); opacity: 0.8; }
@@ -159,7 +160,7 @@ h3 span { display: block; margin-top: 0.15rem; font-size: 0.9rem; font-weight: 4
   .bento { grid-template-columns: 1fr 1fr; }
   .tile--hospital { grid-column: 1 / -1; }
   .tile--mind { grid-column: 1 / -1; }
-  .tile--potato, .tile--sky { grid-column: span 1; }
+  .tile--potato, .tile--sky, .tile--half { grid-column: span 1; }
   .skills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 46rem) {
@@ -168,7 +169,7 @@ h3 span { display: block; margin-top: 0.15rem; font-size: 0.9rem; font-weight: 4
   .hero__canvas { height: 320px; }
   .bento { grid-template-columns: 1fr; }
   .tile--hospital { grid-template-columns: 1fr; }
-  .tile--potato, .tile--sky { grid-column: 1 / -1; }
+  .tile--potato, .tile--sky, .tile--half { grid-column: 1 / -1; }
   .rowx { grid-template-columns: 1fr; padding: 1.5rem 0; }
   .duo, .about { grid-template-columns: 1fr; }
   .about__photo { max-width: 18rem; }
